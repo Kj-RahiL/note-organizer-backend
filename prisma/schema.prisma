@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String   @unique
+  role           UserRole
+  profilePicture String?
+  password       String
+
+  userStatus UserStatus @default(ACTIVE)
+  isDeleted  Boolean    @default(false)
+
+  otp        Int?
+  otpExpiry  DateTime?
+  isVerified Boolean   @default(false)
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Note      Note[]
+  Category  Category[]
+}
+
+model Note {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId    String   @db.ObjectId
+  categoryIds String[] @db.ObjectId
+  title       String
+  content     String
+  piority     Priority @default(MEDIUM)
+  isPinned    Boolean  @default(false)
+  isArchived  Boolean  @default(false)
+  images      Image[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  //relation
+  author     User       @relation(fields: [authorId], references: [id])
+  categories Category[] @relation(fields: [categoryIds], references: [id])
+}
+
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  color     String?  @default("#ffffff")
+  authorId  String   @db.ObjectId
+  noteIds   String[] @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relation
+  author User   @relation(fields: [authorId], references: [id])
+  notes  Note[] @relation(fields: [noteIds], references: [id])
+}
+
+model Image {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  url        String
+  note       Note     @relation(fields: [noteId], references: [id])
+  noteId     String   @db.ObjectId
+  uploadedAt DateTime @default(now())
+}
+
+enum UserRole {
+  ADMIN
+  SUPER_ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
