@@ -65,31 +65,31 @@ Key Models:
 
 ### 🛂 Authentication
 
-| Method | Endpoint             | Description        |
-| ------ | -------------------- | ------------------ |
-| POST   | `/api/auth/register` | User registration  |
-| POST   | `/api/auth/login`    | User login         |
+| Method | Endpoint                | Description        |
+| ------ | ----------------------- | ------------------ |
+| POST   | `/api/v1/auth/register` | User registration  |
+| POST   | `/api/v1/auth/login`    | User login         |
 
 ---
 
 ### 📝 Notes
 
-| Method | Endpoint         | Description                    |
-| ------ | ---------------- | ------------------------------ |
-| GET    | `/api/notes`     | Get paginated notes (filterable) |
-| POST   | `/api/notes`     | Create new note               |
-| PUT    | `/api/notes/:id` | Update note                   |
-| DELETE | `/api/notes/:id` | Archive note (soft delete)    |
+| Method | Endpoint            | Description                   |
+| ------ | ------------------- | ------------------------------|
+| GET    | `/api/v1/notes`     | Get paginated note(filterable)|
+| POST   | `/api/v1/notes`     | Create new note               |
+| PUT    | `/api/v1/notes/:id` | Update note                   |
+| DELETE | `/api/v1/notes/:id` | Archive note (soft delete)    |
 
 ---
 
 ### 🗂 Categories
 
-| Method | Endpoint               | Description            |
-| ------ | ---------------------- | ---------------------- |
-| GET    | `/api/categories`      | Get user's categories  |
-| POST   | `/api/categories`      | Create new category    |
-| PATCH  | `/api/categories/:id`  | Update category color  |
+| Method | Endpoint                  | Description            |
+| ------ | ------------------------- | ---------------------- |
+| GET    | `/api/v1/categories`      | Get user's categories  |
+| POST   | `/api/v1/categories`      | Create new category    |
+| PATCH  | `/api/v1/categories/:id`  | Update category color  |
 
 ---
 
@@ -139,8 +139,8 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ---
 
-> **Documentation generated from Prisma schema v1.0**  
-> Last updated: `${new Date().toISOString()}`
+> **Documentation generated from Prisma schema v6.11.1**  
+> Last updated: `10-07-25`
 
 
 

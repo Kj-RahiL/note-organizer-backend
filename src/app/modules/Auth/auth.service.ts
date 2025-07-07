@@ -41,7 +41,7 @@ const loginUser = async (payload: { email: string; password: string }) => {
     const accessToken = jwtHelpers.generateToken(
       {
         id: userData.id,
-        userName: userData.userName,
+        name: userData.name,
         email: userData.email,
         role: userData.role,
       },
@@ -52,7 +52,7 @@ const loginUser = async (payload: { email: string; password: string }) => {
     const refreshToken = jwtHelpers.generateToken(
       {
         id: userData.id,
-        userName: userData.userName,
+        name: userData.name,
         email: userData.email,
         role: userData.role,
       },
@@ -128,10 +128,10 @@ const sendOtp = async (payload: { email: string }) => {
   });
 
   return { message: "OTP sent your email successfully" };
-}
+};
 
 // user login
-const enterOtp = async (payload: { email: string, otp: string }) => {
+const enterOtp = async (payload: { email: string; otp: string }) => {
   const userData = await prisma.user.findFirst({
     where: {
       AND: [
@@ -153,7 +153,7 @@ const enterOtp = async (payload: { email: string, otp: string }) => {
   const accessToken = jwtHelpers.generateToken(
     {
       id: userData.id,
-      userName: userData.userName,
+      name: userData.name,
       email: userData.email,
       role: userData.role,
     },
@@ -187,24 +187,19 @@ const getMyProfile = async (userId: string) => {
     },
     select: {
       id: true,
-      fullName: true,
-      userName: true,
+      name: true,
       email: true,
       role: true,
       profilePicture: true,
-      coverPicture: true,
-      isOnline: true,
       userStatus: true,
       createdAt: true,
-      updatedAt: true,  
-    }
+      updatedAt: true,
+    },
   });
 
   if (!exitingUser) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User Not found")
+    throw new ApiError(httpStatus.NOT_FOUND, "User Not found");
   }
-
-
 
   return exitingUser;
 };
@@ -316,7 +311,6 @@ const changePassword = async (
   newPassword: string,
   oldPassword: string
 ) => {
-
   const user = await prisma.user.findUnique({
     where: { id: userId },
   });
@@ -343,10 +337,6 @@ const changePassword = async (
   });
   return { message: "Password changed successfully" };
 };
-
-
-
-
 
 // -----------------------------------------------------------------
 // SOCIAL LOGIN
