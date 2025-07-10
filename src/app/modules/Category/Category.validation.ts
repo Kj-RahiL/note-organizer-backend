@@ -1,8 +1,20 @@
 import { z } from "zod";
 
-export const CategorySchema = z.object({
+ const CategorySchema = z.object({
     body: z.object({
         name: z.string(),
-        email: z.string().email(),
+        color: z.string(),
+    }),
+ });
+
+ const updateCategorySchema = z.object({
+    body: z.object({
+        name: z.string().optional(),
+        color: z.string().optional(),
     }),
 });
+
+export const CategoryValidation = {
+    CategorySchema,
+    updateCategorySchema
+}

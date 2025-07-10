@@ -5,7 +5,9 @@ import httpStatus from "http-status";
 import { categoryService } from "./Category.service";
 
 const createCategory = catchAsync(async (req: Request, res: Response) => {
-    const result = await categoryService.createCategory(req.body);
+
+    const authorId = req.user.id
+    const result = await categoryService.createCategory({authorId, ...req.body});
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,

@@ -2,8 +2,9 @@ import prisma from "../../../shared/prisma";
 import QueryBuilder from "../../../helpars/queryBuilder";
 import ApiError from "../../../errors/ApiErrors";
 import httpStatus from "http-status";
+import { TCategory } from "./Category.interface";
 
-const createCategory = async (data: any) => {
+const createCategory = async (data: TCategory) => {
 
 //if you wanna add logic here
     const result = await prisma.category.create({ data });

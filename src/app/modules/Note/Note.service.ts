@@ -18,6 +18,9 @@ const getAllNotes = async (query: Record<string, any>) => {
         .sort()
         .paginate()
         .fields()
+        .include({
+            category:true
+        })
         .execute()
 
     const meta = await queryBuilder.countTotal();

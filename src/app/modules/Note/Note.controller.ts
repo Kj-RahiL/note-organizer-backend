@@ -5,7 +5,8 @@ import httpStatus from "http-status";
 import { noteService } from "./Note.service";
 
 const createNote = catchAsync(async (req: Request, res: Response) => {
-    const result = await noteService.createNote(req.body);
+    const authorId = req.user.id
+    const result = await noteService.createNote({...req.body, authorId});
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,

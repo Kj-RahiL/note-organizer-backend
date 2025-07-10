@@ -14,7 +14,7 @@ const emailSender = async (subject: string, email: string, html: string) => {
   const emailTransport = transporter;
 
   const mailOptions = {
-    from: `"Blu Primal Tournaments" <${config.emailSender.email}>`,
+    from: `"Note Nest" <${config.emailSender.email}>`,
     to: email,
     subject,
     html,
