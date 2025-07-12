@@ -37,6 +37,7 @@ model Note {
   priority   Priority @default(MEDIUM)
   isPinned   Boolean  @default(false)
   isArchived Boolean  @default(false)
+  isDeleted Boolean  @default(false)
   images     Image[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

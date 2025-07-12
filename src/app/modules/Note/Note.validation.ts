@@ -12,12 +12,12 @@ const NoteSchema = z.object({
 
 const UpdateNoteSchema = z.object({
   body: z.object({
-    categoryId: z.string(),
-    title: z.string(),
-    content: z.string(),
-    priority: z.nativeEnum(Priority),
-    isPinned: z.string(),
-    isArchived: z.string(),
+    categoryId: z.string().optional(),
+    title: z.string().optional(),
+    content: z.string().optional(),
+    priority: z.nativeEnum(Priority).optional(),
+    isPinned: z.boolean().optional(),
+    isArchived: z.boolean().optional(),
   }),
 });
 
