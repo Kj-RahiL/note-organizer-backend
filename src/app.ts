@@ -15,9 +15,7 @@ export const corsOptions = {
     "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:3001",
-    "https://blutournments.vercel.app",
-    "https://react-blu-primely.vercel.app"
-    
+    "https://note-organizer-frontend-mu.vercel.ap",
   ],
 
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
