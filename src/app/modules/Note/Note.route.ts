@@ -10,7 +10,11 @@ const router = Router();
 router.post("/create", auth(), validateRequest(NoteValidation.NoteSchema), noteController.createNote);
 
 // get all note
-router.get("/",  noteController.getAllNotes);
+router.get("/", noteController.getAllNotes);
+
+
+// get all my note
+router.get("/my-notes", auth(),  noteController.getMyNotes);
 
 // get single note by id
 router.get("/:id", auth(), noteController.getSingleNote);

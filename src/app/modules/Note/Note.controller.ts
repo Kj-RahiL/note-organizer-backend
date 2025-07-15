@@ -15,6 +15,28 @@ const createNote = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getMyNotes = catchAsync(async (req: Request, res: Response) => {
+  const authorId = req.user.id;
+  const { isArchived, isDeleted, ...query } = req.query;
+  // console.log(showArchived, 'kk');
+  const results = await noteService.getAllNotes(
+    {
+      sort: "-isPinned,-createdAt",
+      authorId,
+      ...query,
+    },
+    isArchived as string,
+    isDeleted as string
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Your Notes retrieved successfully",
+    meta: results.meta,
+    data: results.data,
+  });
+});
+
 const getAllNotes = catchAsync(async (req: Request, res: Response) => {
   const { isArchived, isDeleted, ...query } = req.query;
   // console.log(showArchived, 'kk');
@@ -67,6 +89,7 @@ const deleteNote = catchAsync(async (req: Request, res: Response) => {
 
 export const noteController = {
   createNote,
+  getMyNotes,
   getAllNotes,
   getSingleNote,
   updateNote,

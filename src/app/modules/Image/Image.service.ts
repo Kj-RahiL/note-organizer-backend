@@ -1,59 +1,71 @@
-import prisma from "../../../shared/prisma";
-import QueryBuilder from "../../../helpars/queryBuilder";
+/* eslint-disable prefer-const */
+// Image.service: Module file for the Image.service functionality.
 import ApiError from "../../../errors/ApiErrors";
 import httpStatus from "http-status";
 
-const createImage = async (data: any) => {
+import { Request } from "express";
+import { uploadFile } from "../../../helpars/uploadFile";
+import { deleteFromCloud, deleteMultipleFromCloud } from "../../../utils/uploadToS3";
 
-//if you wanna add logic here
-    const result = await prisma.image.create({ data });
-    return result;
+
+//create image
+const createImage = async (req: Request) => {
+  console.log(req.file);
+  if (!req.file) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No image provided");
+  }
+
+  const file = req.file;
+
+  let imageUrl = await uploadFile(file!, "file");
+
+  return { imageUrl };
 };
 
-const getAllImages = async (query: Record<string, any>) => {
-    const queryBuilder = new QueryBuilder(prisma.image, query);
-    const images = await queryBuilder
-        .search([""])
-        .filter()
-        .sort()
-        .paginate()
-        .fields()
-        .execute()
+// Service for creating images//multiple images creation
+const createMultipleImages = async (req: Request) => {
+  const files = req.files as any[];
+  if (!files || files.length === 0) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No images provided");
+  }
 
-    const meta = await queryBuilder.countTotal();
-    return { meta, data: images };
+  const imageUrls = [];
+
+  for (let file of files) {
+    let url = await uploadFile(file, "files");
+
+    imageUrls.push(url);
+  }
+
+  return { imageUrls };
 };
 
-const getSingleImage = async (id: string) => {
-    const result = await prisma.image.findUnique({ where: { id } });
-    if(!result){
-     throw new ApiError(httpStatus.NOT_FOUND, "Image not found..!!")
-    }
-    return result;
+//delete single image
+const deleteImage = async (payload: { url: string }) => {
+  if (!payload.url) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No image provided");
+  }
+  const result = deleteFromCloud(payload.url);
+  return result;
 };
 
-const updateImage = async (id: string, data: any) => {
-    const existingImage = await prisma.image.findUnique({ where: { id } });
-    if (!existingImage) {
-        throw new ApiError(httpStatus.NOT_FOUND, "Image not found..!!");
-    }
-    const result = await prisma.image.update({ where: { id }, data });
-    return result;
-};
+//delete multiple images
+const deleteMultipleImages = async (urls: string[]) => {
+  if (!urls || urls.length === 0) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "No images provided for deletion"
+    );
+  }
 
-const deleteImage = async (id: string) => {
- const existingImage = await prisma.image.findUnique({ where: { id } });
-    if (!existingImage) {
-        throw new ApiError(httpStatus.NOT_FOUND, "Image not found..!!");
-    }
-    const result = await prisma.image.delete({ where: { id } });
-    return null;
+  const result = deleteMultipleFromCloud(urls);
+
+  return result;
 };
 
 export const imageService = {
-    createImage,
-    getAllImages,
-    getSingleImage,
-    updateImage,
-    deleteImage,
+  createImage,
+  createMultipleImages,
+  deleteImage,
+  deleteMultipleImages,
 };

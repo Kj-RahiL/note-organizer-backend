@@ -14,6 +14,10 @@ const getAllNotes = async (
   isArchived: string,
   isDeleted: string
 ) => {
+  if (query.categoryId === "null" || query.categoryId === "") {
+    delete query.categoryId; // remove it to avoid filtering by invalid id
+  }
+
   const queryBuilder = new QueryBuilder(prisma.note, query);
 
   // build filters based on conditions

@@ -1,11 +1,10 @@
 import { UserRole } from "@prisma/client";
 import express from "express";
-import { fileUploader } from "../../../helpars/fileUploader";
 import auth from "../../middlewares/auth";
 import { UserController } from "./user.controller";
 import { UserValidation } from "./user.validation";
 import validateRequest from "../../middlewares/validateRequest";
-import { parseBodyData } from "../../middlewares/parseBodyData";
+
 
 const router = express.Router();
 
@@ -29,8 +28,6 @@ router.get(
 router.put(
   "/update-me",
   auth(),
-  fileUploader.uploadMultiple,
-  parseBodyData,
   validateRequest(UserValidation.userUpdateSchema),
   UserController.updateUser
 );

@@ -30,24 +30,7 @@ const getUserById = catchAsync(async (req: Request, res: Response) => {
 const updateUser = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user.id;
   const updateData:User = req.body;
-  console.log(req.files, "req.files");
-  console.log(req.file, "req.t");
 
-  if (req.files) {
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-
-    if (files.profilePicture && files.profilePicture[0]) {
-      updateData.profilePicture = `${req.protocol}://${req.get(
-        "host"
-      )}/uploads/${files.profilePicture[0].filename}`;
-    }
-
-    if (files.coverPicture && files.coverPicture[0]) {
-      updateData.coverPicture = `${req.protocol}://${req.get(
-        "host"
-      )}/uploads/${files.coverPicture[0].filename}`;
-    }
-  }
 
   console.log(updateData, "updateData");
 

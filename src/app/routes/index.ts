@@ -4,6 +4,7 @@ import { AuthRoutes } from "../modules/Auth/auth.routes";
 import { UserRoutes } from "../modules/User/user.route";
 import { categoryRoutes } from "../modules/Category/Category.route";
 import { noteRoutes } from "../modules/Note/Note.route";
+import { imageRoutes } from "../modules/Image/Image.route";
 
 
 // import { paymentRoutes } from "../modules/Payment/payment.route";
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: "/notes",
     route: noteRoutes,
+  },
+  {
+    path: "/image",
+    route: imageRoutes,
   },
   
   

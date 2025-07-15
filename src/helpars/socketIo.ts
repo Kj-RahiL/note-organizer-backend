@@ -5,7 +5,7 @@ import { jwtHelpers } from "./jwtHelpers";
 import config from "../config";
 import { Secret } from "jsonwebtoken";
 import prisma from "../shared/prisma";
-import ChatHandler from "../utils/chatted";
+import { UserStatus } from "@prisma/client";
 
 let io: SocketIOServer;
 
@@ -53,7 +53,7 @@ export function socketIo(server: Server) {
         await updateUserStatus(userId, true);
 
         // Initialize handlers
-        ChatHandler(io, socket);
+        // ChatHandler(io, socket);
 
 
         // Handle disconnect
@@ -77,9 +77,7 @@ async function updateUserStatus(userId: string, isOnline: boolean) {
     await prisma.user.update({
         where: { id: userId },
         data: {
-            isOnline,
-            lastSeen: new Date(),
-            ...(isOnline ? {} : { socketId: null }) // Clear socket ID on disconnect
+           userStatus: UserStatus.ACTIVE
         },
     });
 }
