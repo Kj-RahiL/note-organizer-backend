@@ -96,11 +96,11 @@ Key Models:
 
 ## 📚 Postman Documentation
 
-[![Postman Collection](https://run.pstmn.io/button.svg)](https://www.postman.com/collections/your-collection-link)
+[![Postman Collection](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/35080720/2sB34hHgQe)
 
 Full API documentation with example requests:
 
-- [View Postman Collection](https://www.postman.com/collections/your-collection-link)
+- [View Postman Collection](https://documenter.getpostman.com/view/35080720/2sB34hHgQe)
 - [Download Collection JSON](./postman/collection.json)
 
 ---
@@ -118,7 +118,9 @@ Full API documentation with example requests:
    ```
 
 ## 🚀 Deployment
-https://render.com/images/deploy-to-render-button.svg
+**Backend:** https://note-organizer-backend-two.vercel.app
+
+**Frontend:** https://note-organizer-frontend-mu.vercel.app
 
 
 ## 📄 License
@@ -129,7 +131,7 @@ This project is licensed under the [MIT License](./LICENSE).
 
 ## 🐛 Report Issues
 
-Please use [GitHub Issues](https://github.com/yourusername/note-organizer/issues) to report bugs or request features.
+Please use [GitHub Issues](https://github.com/kj-rahil/note-organizer/issues) to report bugs or request features.
 
 ---
 
