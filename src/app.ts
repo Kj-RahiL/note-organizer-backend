@@ -15,7 +15,7 @@ export const corsOptions = {
     "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:3001",
-    "https://note-organizer-frontend-mu.vercel.ap",
+    "https://note-organizer-frontend-mu.vercel.app",
   ],
 
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],

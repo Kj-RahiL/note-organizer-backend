@@ -37,8 +37,8 @@ model Note {
   priority   Priority @default(MEDIUM)
   isPinned   Boolean  @default(false)
   isArchived Boolean  @default(false)
-  isDeleted Boolean  @default(false)
-  images     Image[]
+  isDeleted  Boolean  @default(false)
+  images     String[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -61,13 +61,6 @@ model Category {
   Note   Note[]
 }
 
-model Image {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  url        String
-  note       Note     @relation(fields: [noteId], references: [id])
-  noteId     String   @db.ObjectId
-  uploadedAt DateTime @default(now())
-}
 
 enum UserRole {
   ADMIN
