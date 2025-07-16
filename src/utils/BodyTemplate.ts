@@ -15,8 +15,8 @@ export const AppBodyTemplate = (config: TemplateConfig = {}) => {
   const {
     message = "API Service is Running...",
     version = "1.0.0",
-    repoUrl = "https://github.com/yourusername/note-organizer",
-    docsUrl = "https://github.com/yourusername/note-organizer/blob/main/README.md",
+    repoUrl = "https://github.com/Kj-RahiL/note-organizer-backend",
+    docsUrl = "https://github.com/Kj-RahiL/note-organizer-backend/blob/main/README.md",
     status = "Active",
     showButtons = true,
     customStyles = "",
@@ -147,7 +147,7 @@ export const AppBodyTemplate = (config: TemplateConfig = {}) => {
           
           ${
             status === "Active"
-              ? "<p>A MERN stack application for managing and categorizing notes with TypeScript</p>"
+              ? "<p>A Full stack application for managing and categorizing notes with TypeScript</p>"
               : additionalContent
           }
           

@@ -38,9 +38,9 @@ app.get("/", (req: Request, res: Response) => {
       message: "Welcome to Note Organizer Project API 🚀",
       version: "1.0.1",
       status: "Active",
-      repoUrl: "https://github.com/yourusername/note-organizer",
-      docsUrl: "https://github.com/yourusername/note-organizer#readme",
-      showButtons: false,
+      repoUrl : "https://github.com/Kj-RahiL/note-organizer-backend",
+      docsUrl : "https://github.com/Kj-RahiL/note-organizer-backend/blob/main/README.md",
+      showButtons: true,
     })
   );
 });
